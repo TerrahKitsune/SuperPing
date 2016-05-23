@@ -532,12 +532,15 @@ namespace SuperPing
             {
                 Task.Factory.StartNew(() =>
                 {
+                    this.Dispatcher.Invoke((Action)(() =>
+                    {
                     PingGraphInfo pgi = ((Window)((DispatcherTimer)sender).Tag).Tag as PingGraphInfo;
 
                     pgi.DoPing();
                     ReDrawGraph(pgi);
                     UpdateStatusbar(pgi);
                     UpdateRoute(pgi);
+                    }));
                 });
             }
             catch (Exception ex)
